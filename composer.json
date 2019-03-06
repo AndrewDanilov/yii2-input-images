@@ -1,0 +1,22 @@
+{
+    "name": "andrewdanilov/yii2-input-images",
+    "description": "Input images widget",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension","input","images"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andrew Danilov",
+            "email": "andrewdanilov@gmail.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "~2.0.0",
+        "mihaildev/yii2-elfinder": "*@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "andrewdanilov\\InputImages\\": ""
+        }
+    }
+}
