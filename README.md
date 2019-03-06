@@ -1,6 +1,6 @@
 Input Images Widget
 ===========
-Widget building form fields for uploading single or multiple images. It extends and requires extension mihaildev/InputFile
+Widget building form fields for uploading single or multiple images. It extends and requires extension [MihailDev/yii2-elfinder](https://github.com/MihailDev/yii2-elfinder)
 
 Installation
 ------------
