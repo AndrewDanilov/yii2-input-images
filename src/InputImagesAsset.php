@@ -1,12 +1,12 @@
 <?php
 
-namespace andrewdanilov\InputImages\assets;
+namespace andrewdanilov\InputImages;
 
 use yii\web\AssetBundle;
 
 class InputImagesAsset extends AssetBundle
 {
-	public $sourcePath = '@vendor/andrewdanilov/yii2-input-images/web';
+	public $sourcePath = '@vendor/andrewdanilov/yii2-input-images/src/web';
 	public $css = [
 		'css/input-images.css',
 	];

@@ -1,12 +1,11 @@
 <?php
 
-namespace andrewdanilov\InputImages\widgets;
+namespace andrewdanilov\InputImages;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
 use mihaildev\elfinder\AssetsCallBack;
 use mihaildev\elfinder\InputFile;
-use andrewdanilov\InputImages\assets\InputImagesAsset;
 
 /**
  * Class InputImages

@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-            "andrewdanilov\\InputImages\\": ""
+            "andrewdanilov\\InputImages\\": "src/"
         }
     }
 }
