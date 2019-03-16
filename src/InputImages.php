@@ -82,6 +82,10 @@ class InputImages extends InputFile
 	 */
 	private function addImage($image)
 	{
+		if (empty($image)) {
+			exit;
+		}
+
 		$img = Html::img($image, ['alt' => '']);
 		$preview = Html::tag('div', $img, ['class' => 'input-images-preview']);
 
