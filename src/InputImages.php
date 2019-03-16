@@ -83,7 +83,7 @@ class InputImages extends InputFile
 	private function addImage($image)
 	{
 		if (empty($image)) {
-			exit;
+			return;
 		}
 
 		$img = Html::img($image, ['alt' => '']);
