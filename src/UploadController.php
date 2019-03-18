@@ -9,6 +9,13 @@ class UploadController extends Controller
 {
 	public $path = 'upload/images';
 
+	public function init()
+	{
+		$this->layout = '@vendor/andrewdanilov/src/views/layouts/main';
+		$this->viewPath = '@vendor/andrewdanilov/src/views/upload';
+		parent::init();
+	}
+
 	/**
 	 * @param int $formId
 	 * @return string
@@ -40,9 +47,8 @@ class UploadController extends Controller
 
 		}
 
-		$this->layout = '@vendor/andrewdanilov/src/views/layouts/main';
 		$this->view->params['id'] = $formId;
 		$this->view->params['response'] = $response;
-		return $this->render(Yii::getAlias('@vendor') . '/andrewdanilov/src/views/upload/upload');
+		return $this->render('upload-image');
 	}
 }
