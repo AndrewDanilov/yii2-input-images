@@ -56,6 +56,12 @@ class InputImagesFrontend extends InputWidget
 
 		$this->managerOptions['id'] = $this->options['id'];
 
+		$uploadForm = '\
+			<iframe name="upload_frame_' . $this->options['id'] . '" class="hidden-frame"></iframe>\
+			<form id="upload_form_' . $this->options['id'] . '" action="' . $this->uploadHandler . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" class="hidden-form">\
+				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />\
+			</form>';
+		$this->getView()->registerJs("$(body).append(" . $uploadForm . ")");
 		$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImageFrontendHandler);");
 
 		return $this->buildWidget();
@@ -101,13 +107,6 @@ class InputImagesFrontend extends InputWidget
 
 		$browseBtn = Html::tag($this->buttonTag, $this->buttonName, $this->buttonOptions);
 		$widget .= Html::tag('div', $browseBtn, ['class' => 'input-images-control']);
-
-		$widget .= '
-			<iframe class="upload_frame" name="upload_frame_' . $this->options['id'] . '" style="display:none;"></iframe>
-			<form class="upload_form_' . $this->options['id'] . '" action="' . $this->uploadHandler . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" style="width:0;height:0;overflow:hidden;">
-				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />
-			</form>
-		';
 
 		return Html::tag('div', $widget, [
 			'id' => $this->options['id'] . '_wrapper',
