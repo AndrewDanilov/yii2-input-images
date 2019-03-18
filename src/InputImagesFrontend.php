@@ -61,7 +61,7 @@ class InputImagesFrontend extends InputWidget
 			<form id="upload_form_' . $this->options['id'] . '" action="' . $this->uploadHandler . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" class="hidden-form">\
 				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />\
 			</form>';
-		$this->getView()->registerJs("$(body).append(" . $uploadForm . ")");
+		$this->getView()->registerJs("$(body).append('" . $uploadForm . "')");
 		$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImageFrontendHandler);");
 
 		return $this->buildWidget();
