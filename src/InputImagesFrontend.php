@@ -4,34 +4,21 @@ namespace andrewdanilov\InputImages;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
-use mihaildev\elfinder\AssetsCallBack;
-use mihaildev\elfinder\InputFile;
+use yii\widgets\InputWidget;
 
-/**
- * Class InputImages
- *
- * Do not use widget param $template - it will be ignored
- * Other params:
- * @property string $language - 'ru' by default
- * @property boolean $multiple - if true, several images can be selected
- * @property string $buttonTag - input/button type of browse button tag
- * @property string $buttonName - text on browse button
- * @property array $buttonOptions - options of browse button
- * @property array $options - widget options, i.e. ['id' => 'form_input_id']
- * @property string $name - name and id of input field
- */
-class InputImages extends InputFile
+class InputImagesFrontend extends InputWidget
 {
 	public $buttonName;
+	public $buttonOptions = [];
+	public $multiple = false;
+	public $buttonTag = 'button';
+	public $uploadHandler = 'upload/upload-image';
 
-	private $widgetBody = '';
+	private $widgetBody;
+	private $managerOptions = [];
 
 	public function init()
 	{
-		$this->filter = 'image';
-		if (!isset($this->language)) {
-			$this->language = 'ru';
-		}
 		if (!isset($this->buttonName)) {
 			if ($this->multiple) {
 				$this->buttonName = 'Add';
@@ -65,14 +52,11 @@ class InputImages extends InputFile
 			}
 		}
 
-		AssetsCallBack::register($this->getView());
 		InputImagesAsset::register($this->getView());
 
-		if ($this->multiple) {
-			$this->getView()->registerJs("mihaildev.elFinder.register(" . Json::encode($this->options['id']) . ", InputImagesHandler); $(document).on('click', '#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode($this->_managerOptions) . ");});");
-		} else {
-			$this->getView()->registerJs("mihaildev.elFinder.register(" . Json::encode($this->options['id']) . ", InputImageHandler); $(document).on('click', '#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode($this->_managerOptions) . ");});");
-		}
+		$this->managerOptions['id'] = $this->options['id'];
+
+		$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImageFrontendHandler);");
 
 		return $this->buildWidget();
 	}
@@ -117,6 +101,13 @@ class InputImages extends InputFile
 
 		$browseBtn = Html::tag($this->buttonTag, $this->buttonName, $this->buttonOptions);
 		$widget .= Html::tag('div', $browseBtn, ['class' => 'input-images-control']);
+
+		$widget .= '
+			<iframe class="upload_frame" name="upload_frame_' . $this->options['id'] . '" style="display:none;"></iframe>
+			<form class="upload_form_' . $this->options['id'] . '" action="' . $this->uploadHandler . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" style="width:0;height:0;overflow:hidden;">
+				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />
+			</form>
+		';
 
 		return Html::tag('div', $widget, [
 			'id' => $this->options['id'] . '_wrapper',

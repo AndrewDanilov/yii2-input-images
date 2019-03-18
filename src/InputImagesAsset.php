@@ -14,7 +14,6 @@ class InputImagesAsset extends AssetBundle
 		'js/input-images.js',
 	];
 	public $depends = [
-		'yii\web\YiiAsset',
-		'yii\jui\JuiAsset',
+		'yii\web\JQueryAsset',
 	];
 }
