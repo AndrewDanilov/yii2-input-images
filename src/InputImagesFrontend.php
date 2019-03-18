@@ -2,6 +2,7 @@
 
 namespace andrewdanilov\InputImages;
 
+use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -56,6 +57,7 @@ class InputImagesFrontend extends InputWidget
 		$uploadForm = '\
 			<iframe name="upload_frame_' . $this->options['id'] . '" class="hidden-frame"></iframe>\
 			<form id="upload_form_' . $this->options['id'] . '" action="' . Url::to([$this->uploadHandler, 'formId' => $this->options['id']]) . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" class="hidden-form">\
+				<input type="hidden" name="' . Yii::$app->getRequest()->csrfParam . '" value="' . Yii::$app->getRequest()->getCsrfToken() . '" />\
 				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />\
 			</form>';
 		$this->getView()->registerJs("$('body').append('" . $uploadForm . "')");
