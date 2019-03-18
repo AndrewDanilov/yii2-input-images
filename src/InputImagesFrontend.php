@@ -4,6 +4,7 @@ namespace andrewdanilov\InputImages;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\widgets\InputWidget;
 
 class InputImagesFrontend extends InputWidget
@@ -54,12 +55,16 @@ class InputImagesFrontend extends InputWidget
 
 		$uploadForm = '\
 			<iframe name="upload_frame_' . $this->options['id'] . '" class="hidden-frame"></iframe>\
-			<form id="upload_form_' . $this->options['id'] . '" action="' . $this->uploadHandler . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" class="hidden-form">\
+			<form id="upload_form_' . $this->options['id'] . '" action="' . Url::to([$this->uploadHandler, 'formId' => $this->options['id']]) . '" target="upload_frame_' . $this->options['id'] . '" method="POST" enctype="multipart/form-data" class="hidden-form">\
 				<input type="file" name="file" id="upload_input_' . $this->options['id'] . '" accept="image/jpeg,image/png,image/gif" />\
 			</form>';
 		$this->getView()->registerJs("$('body').append('" . $uploadForm . "')");
 		$this->getView()->registerJs("$('body').on('change', '#upload_input_" . $this->options['id'] . "', function() { $(this).parent('form').submit(); });");
-		$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImageFrontendHandler);");
+		if ($this->multiple) {
+			$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImagesFrontendHandler);");
+		} else {
+			$this->getView()->registerJs("andrewdanilov.inputImages.register(" . Json::encode($this->options['id']) . ", InputImageFrontendHandler);");
+		}
 
 		return $this->buildWidget();
 	}
