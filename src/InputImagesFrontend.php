@@ -104,9 +104,7 @@ class InputImagesFrontend extends InputWidget
 	{
 		$widget = Html::tag('div', $this->widgetBody, ['class' => 'input-images-items']);
 
-		$buttonOptions = $this->buttonOptions;
-		$buttonOptions['for'] = 'upload_input_' . $this->options['id'];
-		$browseBtn = Html::tag('label', $this->buttonName, $this->buttonOptions);
+		$browseBtn = Html::label($this->buttonName, 'upload_input_' . $this->options['id'], $this->buttonOptions);
 
 		$widget .= Html::tag('div', $browseBtn, ['class' => 'input-images-control']);
 
