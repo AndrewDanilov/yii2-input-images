@@ -26,7 +26,7 @@ class UploadUrlRule extends BaseObject implements UrlRuleInterface
 	public function parseRequest($manager, $request)
 	{
 		$pathInfo = $request->getPathInfo();
-		if (preg_match('%^upload\/upload-image/(\w+)$%', $pathInfo, $matches)) {
+		if (preg_match('%^upload\/upload-image/[\w\-]+$%', $pathInfo, $matches)) {
 			$params['formId'] = $matches[1];
 			return ['upload/upload-image', $params];
 		}
