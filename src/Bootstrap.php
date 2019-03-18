@@ -14,7 +14,7 @@ class Bootstrap implements BootstrapInterface
 			],
 		]);
 		$app->controllerMap['upload'] = [
-			'class' => 'andrewdanilov\inputImages\uploadController',
+			'class' => 'andrewdanilov\inputImages\UploadController',
 		];
 	}
 }
