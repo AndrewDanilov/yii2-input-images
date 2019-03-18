@@ -11,7 +11,7 @@ class UploadController extends Controller
 	public $layout = '@vendor/andrewdanilov/src/views/layouts/main';
 
 	/**
-	 * @param $formId
+	 * @param int $formId
 	 * @return string
 	 */
 	public function actionUploadImage($formId)
