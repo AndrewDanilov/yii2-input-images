@@ -6,6 +6,8 @@ use yii\base\BootstrapInterface;
 
 class Bootstrap implements BootstrapInterface
 {
+	public $uploadPath;
+
 	public function bootstrap($app)
 	{
 		$app->getUrlManager()->addRules([
@@ -13,8 +15,13 @@ class Bootstrap implements BootstrapInterface
 				'class' => 'andrewdanilov\InputImages\UploadUrlRule',
 			],
 		]);
-		$app->controllerMap['upload'] = [
+
+		$uploadControllerConfig = [
 			'class' => 'andrewdanilov\inputImages\UploadController',
 		];
+		if (isset($this->uploadPath)) {
+			$uploadControllerConfig['path'] = $this->uploadPath;
+		}
+		$app->controllerMap['upload'] = $uploadControllerConfig;
 	}
 }
