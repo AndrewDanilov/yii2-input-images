@@ -11,6 +11,11 @@ class UploadImage extends Model
 	/* @var $image UploadedFile */
 	public $image;
 
+	public function formName()
+	{
+		return '';
+	}
+
 	public function rules() {
 		return[
 			[['image'], 'file', 'extensions' => 'png, jpg, jpeg, gif'],
