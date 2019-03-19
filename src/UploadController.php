@@ -3,7 +3,9 @@
 namespace andrewdanilov\InputImages;
 
 use Yii;
+use yii\web\BadRequestHttpException;
 use yii\web\Controller;
+use yii\web\UploadedFile;
 
 class UploadController extends Controller
 {
@@ -22,33 +24,25 @@ class UploadController extends Controller
 	 */
 	public function actionUploadImage($formId)
 	{
-		$headers = Yii::$app->response->headers;
-		$headers->set('Content-Type', 'text/html; charset=utf-8');
+		if (Yii::$app->request->isPost) {
+			$model = new UploadImage();
+			$model->image = UploadedFile::getInstance($model, 'image');
 
-		$response = [
-			'success' => 0,
-		];
+			if ($fileUrl = $model->upload($this->path)) {
 
-		// проверим на ошибки
-		if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK && $_FILES['file']['size'] !== 0) {
+				$headers = Yii::$app->response->headers;
+				$headers->set('Content-Type', 'text/html; charset=utf-8');
 
-//			$file_path = ROOT . "/tmp";
-//			$file_name = Files::uniqFileName($file_path, ".jpg");
-//
-//			// создаем необходимые директории
-//			@mkdir($file_path, 0775, true);
-//
-//			$images = Images::getInstance();
-//
-//			$images->resize($_FILES['file']["tmp_name"], $file_path . "/" . $file_name, 800);
+				$this->view->params['id'] = $formId;
+				$this->view->params['response'] = [
+					'success' => true,
+					'url' => $fileUrl,
+				];
 
-			$response['success'] = true;
-			$response['url'] = '123';
-
+				return $this->render('upload-image');
+			}
 		}
 
-		$this->view->params['id'] = $formId;
-		$this->view->params['response'] = $response;
-		return $this->render('upload-image');
+		throw new BadRequestHttpException();
 	}
 }
