@@ -13,8 +13,8 @@ class UploadController extends Controller
 
 	public function init()
 	{
-		$this->layout = '@vendor/andrewdanilov/yii2-input-images/src/views/layouts/main';
-		$this->viewPath = '@vendor/andrewdanilov/yii2-input-images/src/views/upload';
+		$this->layout = '@andrewdanilov/InputImages/views/layouts/main';
+		$this->viewPath = '@andrewdanilov/InputImages/views/upload';
 		parent::init();
 	}
 

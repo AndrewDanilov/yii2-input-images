@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class InputImagesAsset extends AssetBundle
 {
-	public $sourcePath = '@vendor/andrewdanilov/yii2-input-images/src/web';
+	public $sourcePath = '@andrewdanilov/InputImages/web';
 	public $css = [
 		'css/input-images.css',
 	];
