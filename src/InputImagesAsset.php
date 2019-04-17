@@ -14,7 +14,7 @@ class InputImagesAsset extends AssetBundle
 		'js/input-images.js',
 	];
 	public $depends = [
-		'yii\web\JQueryAsset',
+		'yii\web\JqueryAsset',
 		'rmrevin\yii\fontawesome\AssetBundle',
 	];
 }
