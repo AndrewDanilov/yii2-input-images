@@ -25,7 +25,7 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-For frontend
+__For frontend__
 
 In your config/main.php add:
 
@@ -36,7 +36,7 @@ return [
 		...
 		[
 			'class' => 'andrewdanilov\InputImages\Bootstrap',
-			'path' => 'upload/images', // path to upload images
+			'uploadPath' => 'upload/post/images', // path to upload images, default is 'upload/images'
 		],
 	],
 ];
@@ -54,7 +54,7 @@ use andrewdanilov\InputImages\InputImagesFrontend;
 <?php ActiveForm::end(); ?>
 ```
 
-For backend
+__For backend__
 
 In your config/main.php add:
 
