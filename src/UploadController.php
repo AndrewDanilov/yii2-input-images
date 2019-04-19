@@ -3,6 +3,7 @@
 namespace andrewdanilov\InputImages;
 
 use Yii;
+use yii\helpers\Url;
 use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\web\UploadedFile;
@@ -36,7 +37,7 @@ class UploadController extends Controller
 				$this->view->params['id'] = $formId;
 				$this->view->params['response'] = [
 					'success' => true,
-					'url' => $fileUrl,
+					'url' => Url::base() . '/' . $fileUrl,
 				];
 
 				return $this->render('upload-image');
