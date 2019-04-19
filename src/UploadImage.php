@@ -27,7 +27,7 @@ class UploadImage extends Model
 			$fileName = uniqid();
 			$fileUrl = trim($path, '/') . "/" . $fileName . "." . $this->image->extension;
 			$filePath = Yii::getAlias('@webroot') . "/" . $fileUrl;
-			mkdir($filePath, 0777, true);
+			mkdir(dirname($filePath), 0777, true);
 			if ($this->image->saveAs($filePath)) {
 				return $fileUrl;
 			}
