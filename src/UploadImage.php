@@ -25,7 +25,7 @@ class UploadImage extends Model
 	public function upload($path) {
 		if ($this->validate()) {
 			$fileName = uniqid();
-			$fileUrl = trim($path, '/') . "/" . $fileName . $this->image->extension;
+			$fileUrl = trim($path, '/') . "/" . $fileName . "." . $this->image->extension;
 			$filePath = Yii::getAlias('@webroot') . "/" . $fileUrl;
 			if ($this->image->saveAs($filePath)) {
 				return $fileUrl;
