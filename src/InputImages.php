@@ -90,7 +90,7 @@ class InputImages extends InputFile
 		$preview = Html::tag('div', $img, ['class' => 'input-images-preview']);
 
 		if ($this->hasModel()) {
-			$attribute = $this->attribute;
+			$attribute = Html::getInputName($this->model, $this->attribute);
 		} else {
 			$attribute = $this->name;
 		}
