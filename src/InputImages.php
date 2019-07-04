@@ -95,7 +95,7 @@ class InputImages extends InputFile
 			$attribute = $this->name;
 		}
 		if ($this->multiple) {
-			$attribute .= $attribute . '[]';
+			$attribute .= '[]';
 		}
 		if ($this->hasModel()) {
 			$input = Html::activeHiddenInput($this->model, $attribute, ['value' => $image]);
