@@ -35,7 +35,7 @@ class InputImagesFrontend extends InputWidget
 	public function run()
 	{
 		if ($this->hasModel()) {
-			$value = $this->model->{$this->attribute};
+			$value = Html::getAttributeValue($this->model, $this->attribute);
 		} else {
 			$value = $this->value;
 		}
@@ -84,17 +84,20 @@ class InputImagesFrontend extends InputWidget
 		$preview = Html::tag('div', $img, ['class' => 'input-images-preview']);
 
 		if ($this->hasModel()) {
-			$attribute = $this->attribute;
+			$name = Html::getInputName($this->model, $this->attribute);
 		} else {
-			$attribute = $this->name;
+			$name = $this->name;
 		}
 		if ($this->multiple) {
-			$attribute .= $attribute . '[]';
+			$name .= '[]';
 		}
 		if ($this->hasModel()) {
-			$input = Html::activeHiddenInput($this->model, $attribute, ['value' => $image]);
+			$input = Html::activeHiddenInput($this->model, $this->attribute, [
+				'name' => $name,
+				'value' => $image,
+			]);
 		} else {
-			$input = Html::hiddenInput($attribute, $image);
+			$input = Html::hiddenInput($name, $image);
 		}
 
 		$remove = Html::tag('div', '', ['class' => 'input-images-remove fa fa-times']);
