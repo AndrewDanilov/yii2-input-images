@@ -48,7 +48,7 @@ class InputImages extends InputFile
 	public function run()
 	{
 		if ($this->hasModel()) {
-			$value = $this->model->{$this->attribute};
+			$value = Html::getAttributeValue($this->model, $this->attribute);
 		} else {
 			$value = $this->value;
 		}
