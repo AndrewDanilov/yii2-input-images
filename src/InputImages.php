@@ -90,17 +90,20 @@ class InputImages extends InputFile
 		$preview = Html::tag('div', $img, ['class' => 'input-images-preview']);
 
 		if ($this->hasModel()) {
-			$attribute = Html::getInputName($this->model, $this->attribute);
+			$name = Html::getInputName($this->model, $this->attribute);
 		} else {
-			$attribute = $this->name;
+			$name = $this->name;
 		}
 		if ($this->multiple) {
-			$attribute .= '[]';
+			$name .= '[]';
 		}
 		if ($this->hasModel()) {
-			$input = Html::activeHiddenInput($this->model, $attribute, ['value' => $image]);
+			$input = Html::activeHiddenInput($this->model, $this->attribute, [
+				'name' => $name,
+				'value' => $image,
+			]);
 		} else {
-			$input = Html::hiddenInput($attribute, $image);
+			$input = Html::hiddenInput($name, $image);
 		}
 
 		$remove = Html::tag('div', '', ['class' => 'input-images-remove fa fa-times']);
