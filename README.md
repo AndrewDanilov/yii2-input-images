@@ -32,11 +32,10 @@ In your config/main.php add:
 ```php
 return [
 	...
-	'bootstrap' => [
-		...
-		[
-			'class' => 'andrewdanilov\InputImages\Bootstrap',
-			'uploadPath' => 'upload/post/images', // path to upload images, default is 'upload/images'
+	'controllerMap' => [
+		'upload' => [
+			'class' => 'andrewdanilov\InputImages\UploadController',
+			'path' => 'upload/post/images', // path to upload images, default is 'upload/images'
 		],
 	],
 ];

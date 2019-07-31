@@ -20,5 +20,8 @@
         "psr-4": {
             "andrewdanilov\\InputImages\\": "src/"
         }
+    },
+    "extra": {
+        "bootstrap": "andrewdanilov\\InputImages\\Bootstrap"
     }
 }

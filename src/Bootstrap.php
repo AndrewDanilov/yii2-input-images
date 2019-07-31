@@ -17,13 +17,5 @@ class Bootstrap implements BootstrapInterface
 				'class' => 'andrewdanilov\InputImages\UploadUrlRule',
 			],
 		]);
-
-		$uploadControllerConfig = [
-			'class' => 'andrewdanilov\InputImages\UploadController',
-		];
-		if (isset($this->uploadPath)) {
-			$uploadControllerConfig['path'] = $this->uploadPath;
-		}
-		$app->controllerMap['upload'] = $uploadControllerConfig;
 	}
 }

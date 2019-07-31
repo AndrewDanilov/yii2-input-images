@@ -1,5 +1,4 @@
 <?php
-
 namespace andrewdanilov\InputImages;
 
 use yii\web\UrlRuleInterface;
