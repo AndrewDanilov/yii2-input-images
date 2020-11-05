@@ -1,7 +1,7 @@
 <?php
-
 namespace andrewdanilov\InputImages;
 
+use Yii;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use mihaildev\elfinder\AssetsCallBack;
@@ -23,6 +23,7 @@ use mihaildev\elfinder\InputFile;
 class InputImages extends InputFile
 {
 	public $buttonName;
+	public $controller;
 
 	private $widgetBody = '';
 
@@ -41,6 +42,13 @@ class InputImages extends InputFile
 		}
 		if (!isset($this->buttonOptions['class'])) {
 			$this->buttonOptions['class'] = 'btn btn-primary';
+		}
+		if (empty($this->controller)) {
+			$this->controller = 'elfinder';
+			$module = Yii::$app->controller->module;
+			if ($module !== null) {
+				$this->controller = $module->id . '/' . $this->controller;
+			}
 		}
 		parent::init();
 	}
