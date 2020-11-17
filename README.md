@@ -31,7 +31,7 @@ In your config/main.php add:
 
 ```php
 return [
-	...
+	// ...
 	'controllerMap' => [
 		'upload' => [
 			'class' => 'andrewdanilov\InputImages\UploadController',
@@ -59,7 +59,7 @@ In your config/main.php add:
 
 ```php
 return [
-	...
+	// ...
 	'controllerMap' => [
 		'elfinder' => [
 			'class' => 'mihaildev\elfinder\Controller',
