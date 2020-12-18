@@ -44,11 +44,13 @@ class InputImages extends InputFile
 			$this->buttonOptions['class'] = 'btn btn-primary';
 		}
 		if (empty($this->controller)) {
-			$this->controller = 'elfinder';
+			$path = 'elfinder';
 			$module = Yii::$app->controller->module;
-			if ($module !== null) {
-				$this->controller = $module->id . '/' . $this->controller;
+			while ($module->module !== null) {
+				$path = $module->id . '/' . $path;
+				$module = $module->module;
 			}
+			$this->controller = $path;
 		}
 		parent::init();
 	}
