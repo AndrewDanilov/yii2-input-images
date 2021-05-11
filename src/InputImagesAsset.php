@@ -1,5 +1,4 @@
 <?php
-
 namespace andrewdanilov\InputImages;
 
 use yii\web\AssetBundle;
@@ -15,6 +14,6 @@ class InputImagesAsset extends AssetBundle
 	];
 	public $depends = [
 		'yii\web\JqueryAsset',
-		'rmrevin\yii\fontawesome\AssetBundle',
+		'andrewdanilov\fontawesome\AssetBundle',
 	];
 }
