@@ -5,7 +5,6 @@ use yii\web\AssetBundle;
 
 class InputImagesAsset extends AssetBundle
 {
-	public $sourcePath = '@andrewdanilov/InputImages/web';
 	public $css = [
 		'css/input-images.css',
 	];
@@ -16,4 +15,10 @@ class InputImagesAsset extends AssetBundle
 		'yii\web\JqueryAsset',
 		'andrewdanilov\fontawesome\AssetBundle',
 	];
+
+	public function init()
+	{
+		$this->sourcePath = __DIR__ . "/web";
+		parent::init();
+	}
 }
