@@ -25,7 +25,7 @@ class InputImages extends InputFile
 	public $buttonName;
 	public $controller;
 
-	private $widgetBody = '';
+	private $widgetBody;
 
 	public function init()
 	{
@@ -63,6 +63,21 @@ class InputImages extends InputFile
 			$value = $this->value;
 		}
 
+		// add empty hidden field in the begining to send it with form data if there is no
+		// other image fields (because otherwise it won't be saved as empty)
+		if ($this->hasModel()) {
+			$name = Html::getInputName($this->model, $this->attribute);
+			$input = Html::activeHiddenInput($this->model, $this->attribute, [
+				'name' => $name,
+				'value' => '',
+			]);
+		} else {
+			$name = $this->name;
+			$input = Html::hiddenInput($name, '');
+		}
+		$this->widgetBody = $input;
+
+		// filling form with images fields
 		if ($this->multiple) {
 			if (is_array($value)) {
 				foreach ($value as $image) {
