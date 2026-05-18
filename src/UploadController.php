@@ -10,7 +10,8 @@ use yii\web\UploadedFile;
 
 class UploadController extends Controller
 {
-	public $path = 'upload/images';
+	public $path = '@webroot/upload/images';
+	public $baseUrl = '/upload/images';
 
 	public function init()
 	{
@@ -29,7 +30,7 @@ class UploadController extends Controller
 			$model = new UploadImage();
 			$model->image = UploadedFile::getInstance($model, 'image');
 
-			if ($fileUrl = $model->upload($this->path)) {
+			if ($fileName = $model->upload($this->path)) {
 
 				$headers = Yii::$app->response->headers;
 				$headers->set('Content-Type', 'text/html; charset=utf-8');
@@ -37,7 +38,7 @@ class UploadController extends Controller
 				$this->view->params['id'] = $formId;
 				$this->view->params['response'] = [
 					'success' => true,
-					'url' => Url::base() . '/' . $fileUrl,
+					'url' => rtrim($this->baseUrl, '/') . '/' . $fileName,
 				];
 
 				return $this->render('upload-image');

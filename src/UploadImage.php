@@ -24,12 +24,11 @@ class UploadImage extends Model
 
 	public function upload($path) {
 		if ($this->validate()) {
-			$fileName = uniqid();
-			$fileUrl = trim($path, '/') . "/" . $fileName . "." . $this->image->extension;
-			$filePath = Yii::getAlias('@webroot') . "/" . $fileUrl;
+            $fileName = uniqid() . "." . $this->image->extension;
+            $filePath = Yii::getAlias(rtrim($path, '/')) . "/" . $fileName;
 			@mkdir(dirname($filePath), 0777, true);
 			if ($this->image->saveAs($filePath)) {
-				return $fileUrl;
+				return $fileName;
 			}
 		}
 		return false;

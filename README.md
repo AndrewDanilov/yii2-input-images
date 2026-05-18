@@ -25,7 +25,7 @@ to the require section of your `composer.json` file.
 Usage
 -----
 
-__For frontend__
+__For use without a file manager__
 
 In your config/main.php add:
 
@@ -33,9 +33,10 @@ In your config/main.php add:
 return [
 	// ...
 	'controllerMap' => [
-		'upload' => [
+		'uploader' => [
 			'class' => 'andrewdanilov\InputImages\UploadController',
-			'path' => 'upload/post/images', // path to upload images, default is 'upload/images'
+			'path' => '@frontend/web/upload/post/images', // writable path to upload images to, default is '@webroot/upload/images'
+            'baseUrl' => '/upload/post/images', // base url to uploaded images, default is '/upload/images'
 		],
 	],
 ];
@@ -45,15 +46,15 @@ Then in view just add a widget call:
 
 ```html
 <?php
-use andrewdanilov\InputImages\InputImagesFrontend;
+use andrewdanilov\InputImages\InputImagesSimple;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>                              
-<?= $form->field($model, 'logo')->widget(InputImagesFrontend::class) ?>
+<?= $form->field($model, 'logo')->widget(InputImagesSimple::class) ?>
 <?php ActiveForm::end(); ?>
 ```
 
-__For backend__
+__For use with the file manager__
 
 In your config/main.php add:
 

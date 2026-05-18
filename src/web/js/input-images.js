@@ -33,6 +33,14 @@ andrewdanilov.getInputName = function(formName, formAttribute, multiple) {
  */
 var InputImagesHandler = function(files, id) {
 	var wrapper = $('#' + id + '_wrapper');
+
+	// If there is an empty input field, which indicates that images items have been deleted before,
+	// we need to remove this indicator field as we add new images.
+	const empty_input = wrapper.children('input[value=""]');
+	if (empty_input.length) {
+		empty_input.remove();
+	}
+
 	var formName = wrapper.attr('data-form-name');
 	var formAttribute = wrapper.attr('data-form-attribute');
 	var items = wrapper.find('.input-images-items');
@@ -53,6 +61,14 @@ var InputImagesHandler = function(files, id) {
  */
 var InputImageHandler = function(file, id) {
 	var wrapper = $('#' + id + '_wrapper');
+
+	// If there is an empty input field, which indicates that images items have been deleted before,
+	// we need to remove this indicator field as we add new images.
+	const empty_input = wrapper.children('input[value=""]');
+	if (empty_input.length) {
+		empty_input.remove();
+	}
+
 	var formName = wrapper.attr('data-form-name');
 	var formAttribute = wrapper.attr('data-form-attribute');
 	var items = wrapper.find('.input-images-items');
@@ -67,8 +83,16 @@ var InputImageHandler = function(file, id) {
 /**
  * @return {boolean}
  */
-var InputImagesFrontendHandler = function(response, id) {
+var InputImagesSimpleHandler = function(response, id) {
 	var wrapper = $('#' + id + '_wrapper');
+
+	// If there is an empty input field, which indicates that images items have been deleted before,
+	// we need to remove this indicator field as we add new images.
+	const empty_input = wrapper.children('input[value=""]');
+	if (empty_input.length) {
+		empty_input.remove();
+	}
+
 	var formName = wrapper.attr('data-form-name');
 	var formAttribute = wrapper.attr('data-form-attribute');
 	var items = wrapper.find('.input-images-items');
@@ -83,8 +107,16 @@ var InputImagesFrontendHandler = function(response, id) {
 /**
  * @return {boolean}
  */
-var InputImageFrontendHandler = function(response, id) {
+var InputImageSimpleHandler = function(response, id) {
 	var wrapper = $('#' + id + '_wrapper');
+
+	// If there is an empty input field, which indicates that images items have been deleted before,
+	// we need to remove this indicator field as we add new images.
+	const empty_input = wrapper.children('input[value=""]');
+	if (empty_input.length) {
+		empty_input.remove();
+	}
+
 	var formName = wrapper.attr('data-form-name');
 	var formAttribute = wrapper.attr('data-form-attribute');
 	var items = wrapper.find('.input-images-items');
@@ -104,6 +136,18 @@ $(function () {
 		});
 	}
 	items.on('click', '.input-images-remove', function () {
+		const image_item = $(this).parents('.input-images-item');
+		const widget_wrapper = image_item.parent().parent();
+
+		const is_last_item = image_item.siblings('.input-images-item').length === 0;
+
+		if (is_last_item) {
+			// If it is last, we need to empty it and move it to widget wrapper to keep of deleting.
+			// We need an empty hidden field to send it with form data if there is no other image fields
+			// (otherwise it won't be saved as empty and leaves previous image field untouched)
+			const input = image_item.find('input').val('').appendTo(widget_wrapper);
+		}
+
 		$(this).parents('.input-images-item').remove();
 	});
 });
